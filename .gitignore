@@ -1,1 +1,6 @@
+.settings/
+sql/
 target/
+testD/
+testH/
+*.log

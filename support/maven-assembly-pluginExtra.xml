@@ -1,0 +1,7 @@
+<tempXXX>
+  <configuration>
+    <descriptors>
+      <descriptor>${basedir}/assembly.xml</descriptor>
+    </descriptors>
+  </configuration>
+</tempXXX>

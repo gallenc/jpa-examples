@@ -1,0 +1,11 @@
+<tempXXX>
+  <configuration>
+    <mainClass>${this.mainClass}</mainClass>
+    <systemProperties>
+      <systemProperty>
+        <key>log4j.configuration</key>
+        <value>file:${basedir}/log4j.properties</value>
+      </systemProperty>
+    </systemProperties>
+  </configuration>
+</tempXXX>
