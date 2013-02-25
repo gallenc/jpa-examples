@@ -1,0 +1,4 @@
+<configuration xmlns="http://maven.apache.org/POM/4.0.0">
+  <source>1.6</source>
+  <target>1.6</target>
+</configuration>

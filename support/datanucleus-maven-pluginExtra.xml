@@ -1,0 +1,16 @@
+<tempXXX>
+  <configuration>
+    <api>JPA</api>
+    <persistenceUnitName>${this.persistenceUnitName}</persistenceUnitName>
+    <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration>
+    <verbose>false</verbose>
+  </configuration>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>enhance</goal>
+      </goals>
+      </execution>
+  </executions>
+</tempXXX>
