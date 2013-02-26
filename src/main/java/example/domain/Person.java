@@ -12,9 +12,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 package example.domain;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +34,7 @@ public class Person {
   @Column(length=20)
   private String lastName;
 
-  @ManyToOne
+  @ManyToOne(fetch=FetchType.EAGER)
   @JoinTable(
     name="person_family"
    ,joinColumns = @JoinColumn(
