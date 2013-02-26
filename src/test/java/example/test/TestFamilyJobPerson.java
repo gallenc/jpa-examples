@@ -69,11 +69,6 @@ public class TestFamilyJobPerson {
 
 			if (haveExistingPersons) {
 				LOG.info("Have existing persons, so proceed to delete them");
-//				Note that JPQL cannot delete person_family because it does
-//				not map to a single Java class - use native query instead
-				q = em.createNativeQuery("DELETE FROM person_family");
-				deletedRecords = q.executeUpdate();
-				LOG.info("Deleted {} person_family records", deletedRecords);
 				q = em.createQuery("delete from Person p");
 				deletedRecords = q.executeUpdate();
 				LOG.info("Deleted {} person records", deletedRecords);
