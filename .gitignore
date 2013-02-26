@@ -3,4 +3,5 @@ sql/
 target/
 testD/
 testH/
+testH.*
 *.log
