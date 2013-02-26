@@ -19,14 +19,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Person {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id")
+  @Column(name = "person_id")
   private int personid;
   
   @Column(length=20)
@@ -35,17 +34,7 @@ public class Person {
   private String lastName;
 
   @ManyToOne(fetch=FetchType.EAGER)
-  @JoinTable(
-    name="person_family"
-   ,joinColumns = @JoinColumn(
-	 	  name = "family_id"
-         ,referencedColumnName = "id"
-         )
-   ,inverseJoinColumns = @JoinColumn(
-		  name = "person_id"
-         ,referencedColumnName = "id"
-         )
-  )
+  @JoinColumn(name="family_id")
   private Family family;
 
   public Person() {
