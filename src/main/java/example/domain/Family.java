@@ -27,7 +27,7 @@ import javax.persistence.OneToMany;
 public class Family {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name="family_id")
+  @Column(name="id")
   private int familyid;
 
   @Column(length=30)
