@@ -40,14 +40,40 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
          <version>10.9.1.0</version>
       </dependency>
       <dependency>
-         <groupId>org.eclipse.persistence</groupId>
-         <artifactId>eclipselink</artifactId>
-         <version>2.4.0</version>
+         <groupId>javax.jdo</groupId>
+         <artifactId>jdo-api</artifactId>
+         <version>3.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.apache.geronimo.specs</groupId>
+         <artifactId>geronimo-jpa_2.0_spec</artifactId>
+         <version>1.1</version>
+      </dependency>
+      <dependency>
+         <groupId>org.datanucleus</groupId>
+         <artifactId>datanucleus-core</artifactId>
+         <version>[3.2.0-m2, 3.2.99)</version>
+      </dependency>
+      <dependency>
+         <groupId>org.datanucleus</groupId>
+         <artifactId>datanucleus-api-jpa</artifactId>
+         <version>[3.2.0-m2, 3.2.99)</version>
+      </dependency>
+      <dependency>
+         <groupId>org.datanucleus</groupId>
+         <artifactId>datanucleus-rdbms</artifactId>
+         <version>[3.2.0-m2, 3.2.99)</version>
+      </dependency>
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>[1.2, 1.3)</version>
       </dependency>
    </dependencies>
    <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <this.persistenceUnitName>persistenceUnit</this.persistenceUnitName>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <this.mainClass>org.tssg.fame.combinedJPAexample.main.TestBookProductInventory</this.mainClass>
    </properties>
    <build>
       <plugins>
@@ -65,14 +91,69 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.13</version>
          </plugin>
+         <plugin>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-maven-plugin</artifactId>
+            <version>3.2.0-m3</version>
+            <configuration>
+               <api>JPA</api>
+               <persistenceUnitName>${this.persistenceUnitName}</persistenceUnitName>
+               <log4jConfiguration>${basedir}/log4j.properties</log4jConfiguration>
+               <verbose>false</verbose>
+            </configuration>
+            <executions>
+               <execution>
+                  <phase>compile</phase>
+                  <goals>
+                     <goal>enhance</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.1</version>
+            <configuration>
+               <mainClass>${this.mainClass}</mainClass>
+               <systemProperties>
+                  <systemProperty>
+                     <key>log4j.configuration</key>
+                     <value>file:${basedir}/log4j.properties</value>
+                  </systemProperty>
+               </systemProperties>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.4</version>
+               <configuration>
+                  <descriptors>
+                     <descriptor>${basedir}/assembly.xml</descriptor>
+                  </descriptors>
+               </configuration>
+         </plugin>
       </plugins>
    </build>
    <repositories>
       <repository>
-         <id>Eclipselink repo</id>
-         <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
-         <name>Eclipselink repo</name>
+         <id>DN_M2_Repo</id>
+         <url>http://www.datanucleus.org/downloads/maven2</url>
+         <name>DataNucleus Repository</name>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
       </repository>
    </repositories>
-   <pluginRepositories/>
+   <pluginRepositories>
+      <pluginRepository>
+         <id>DataNucleus_2</id>
+         <url>http://www.datanucleus.org/downloads/maven2/</url>
+         <name/>
+         <snapshots>
+            <enabled>false</enabled>
+         </snapshots>
+      </pluginRepository>
+   </pluginRepositories>
 </project>
