@@ -32,12 +32,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
       <dependency>
          <groupId>org.apache.derby</groupId>
          <artifactId>derby</artifactId>
-         <version>10.8.2.2</version>
+         <version>10.9.1.0</version>
       </dependency>
       <dependency>
          <groupId>org.apache.derby</groupId>
          <artifactId>derbytools</artifactId>
-         <version>10.8.2.2</version>
+         <version>10.9.1.0</version>
       </dependency>
       <dependency>
          <groupId>org.eclipse.persistence</groupId>

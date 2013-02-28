@@ -28,7 +28,7 @@ public class Family {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name="family_id")
-  private int familyid;
+  private int id;
 
   @Column(length=30)
   private String description;
@@ -37,17 +37,17 @@ public class Family {
     mappedBy="family"
    ,cascade={CascadeType.ALL}
   )
-  private final List<Person> persons = new ArrayList<Person>();
+  private List<Person> persons = new ArrayList<Person>();
 
   public Family() {
   }
   
-  public int getFamilyid() {
-    return familyid;
+  public int getId() {
+    return id;
   }
 
-  public void setFamilyid(int id) {
-    familyid = id;
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getDescription() {
@@ -77,6 +77,6 @@ public class Family {
 	  for (Person person : persons) {
 		  memberStr = memberStr + person.toString() + "\n";
 	  }
-	  return "Family id = " + familyid + " description = " + description + " persons = \n" + memberStr;
+	  return "Family id = " + id + " description = " + description + " persons = \n" + memberStr;
   }
 } 

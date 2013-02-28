@@ -14,7 +14,6 @@ package example.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,22 +25,22 @@ public class Person {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "person_id")
-  private int personid;
+  private int id;
   
   @Column(length=20)
   private String firstName;
   @Column(length=20)
   private String lastName;
 
-  @ManyToOne(fetch=FetchType.EAGER)
+  @ManyToOne
   @JoinColumn(name = "family_id")
   private Family family;
 
   public Person() {
   }
   
-  public int getPersonid() {
-    return personid;
+  public int getId() {
+    return id;
   }
 
   public String getFirstName() {
@@ -71,6 +70,6 @@ public class Person {
 
   @Override
   public String toString() {
-	return "Person id = [" + personid + "] firstName = " + firstName +" lastName = " + lastName + " familyid = " + family.getFamilyid(); 
+	return "Person id = [" + id + "] firstName = " + firstName +" lastName = " + lastName + " familyid = " + family.getId(); 
   }
 }

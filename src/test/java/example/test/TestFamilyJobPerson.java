@@ -14,8 +14,6 @@ package example.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -89,12 +87,10 @@ public class TestFamilyJobPerson {
 
 			family = new Family();
 			family.setDescription("Family for the Knopfs");
-			em.persist(family);
 			for (int i = 0; i < 40; i++) {
 				person = new Person();
 				person.setFirstName("Jim_" + i);
 				person.setLastName("Knopf_" + i);
-				em.persist(person);
 				family.addMember(person);
 			}
 			em.persist(family);
@@ -109,7 +105,7 @@ public class TestFamilyJobPerson {
 		// Close the EntityManager so that resources are conserved.
 		em.close();
 
-		LOG.info("Added members to Family, after close: {}",family);
+		LOG.info("Added members to Family: {}",family);
 	}
 
 	@Test
@@ -123,8 +119,9 @@ public class TestFamilyJobPerson {
 		Query q = em.createQuery("select m from Person m");
 
 		// We should have 40 Persons in the database
-		LOG.info("Number of persons should be 40 and is {}",q.getResultList().size());
-		assertTrue(q.getResultList().size() == 40);
+		int numPersons = q.getResultList().size();
+		LOG.info("Number of persons should be 40 and is {}",numPersons);
+		assertTrue(numPersons == 40);
 
 		em.close();
 	}
@@ -132,8 +129,7 @@ public class TestFamilyJobPerson {
 	@Test
 	public void checkFamily() {
 		EntityManager em = factory.createEntityManager();
-		// Go through each of the entities and print out each of their
-		// messages, as well as the date on which it was created
+
 		Query q = em.createQuery("select f from Family f");
 
 		// We should have one family with 40 persons
@@ -141,28 +137,24 @@ public class TestFamilyJobPerson {
 		assertTrue(q.getResultList().size() == 1);
 		Family family = (Family) q.getSingleResult();
 		LOG.info("Family retrieved from DB is {}",family);
-		List<Person> familyMembers = family.getMembers();
-		int numMembers = familyMembers.size();
+		int numMembers = family.getMembers().size();
 		LOG.info("Number of family members should be 40 and is {}", numMembers);
-		assertTrue(familyMembers.size() == 40);
+		assertTrue(numMembers == 40);
 		em.close();
 	}
 
 	@Test(expected = javax.persistence.NoResultException.class)
 	public void deletePerson() {
 		EntityManager em = factory.createEntityManager();
-		// Begin a new local transaction so that we can persist a new entity
+
 		em.getTransaction().begin();
-		Query q = em
-				.createQuery("SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName");
-		q.setParameter("firstName", "Jim_1");
-		q.setParameter("lastName", "Knopf_!");
+		Query q = em.createQuery("SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName");
+		q.setParameter("firstName", "John");
+		q.setParameter("lastName", "Doe");
 		Person user = (Person) q.getSingleResult();
 		em.remove(user);
 		em.getTransaction().commit();
 		q.getSingleResult();
-		// Begin a new local transaction so that we can persist a new entity
-
 		em.close();
 	}
 }
