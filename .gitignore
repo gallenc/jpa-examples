@@ -1,7 +1,9 @@
 .settings/
+.shell_history
 sql/
 target/
 testD/
 testH/
 testH.*
+testN/
 *.log

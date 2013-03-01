@@ -16,11 +16,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
              version="2.0">
    <persistence-unit name="persistenceUnit" transaction-type="RESOURCE_LOCAL">
       <properties>
-         <property name="javax.persistence.jdbc.driver"
-                   value="org.apache.derby.jdbc.EmbeddedDriver"/>
-         <property name="javax.persistence.jdbc.url" value="jdbc:derby:testD;create=true"/>
-         <property name="javax.persistence.jdbc.user" value="je"/>
-         <property name="javax.persistence.jdbc.password" value="je"/>
+         <property name="javax.persistence.jdbc.url" value="neo4j:testN"/>
          <property name="datanucleus.autoCreateSchema" value="true"/>
       </properties>
       <class>example.domain.Family</class>
