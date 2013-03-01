@@ -28,10 +28,10 @@ import org.slf4j.LoggerFactory;
 import example.domain.Family;
 import example.domain.Person;
 
-public class TestFamilyJobPerson {
+public class TestFamilyPersonJob {
 
 	private static final org.slf4j.Logger LOG = LoggerFactory
-			.getLogger(TestFamilyJobPerson.class);
+			.getLogger(TestFamilyPersonJob.class);
 	private static final String userHome = System.getProperty("user.home");
 	private static final String baseDir = "work";
 	private static final String project = "jpa-examples";
