@@ -1,0 +1,5 @@
+#!/bin/sh
+### DELETE neo4j and ADD rdbms ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-neo4j version='[3.2.0-m2, 3.2.99)'
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-rdbms version='[3.2.0-m2, 3.2.99)'
+

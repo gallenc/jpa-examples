@@ -1,0 +1,4 @@
+#!/bin/sh
+f=$d/$artifactId/pom.xml
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.hsqldb artifactId=hsqldb version=2.2.9
+

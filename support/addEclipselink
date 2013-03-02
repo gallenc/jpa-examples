@@ -1,0 +1,22 @@
+#!/bin/sh
+f=$d/$artifactId/pom.xml
+### ADD the eclipselink repository ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addRepository.xsl -o:$f id='Eclipselink repo' url=http://download.eclipse.org/rt/eclipselink/maven.repo name='Eclipselink repo'
+
+### ADD eclipselink dependency ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.eclipse.persistence artifactId=eclipselink version=2.4.0
+
+### Add the pom properties ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=this.persistenceUnitName propertyValue=persistenceUnit
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=project.build.sourceEncoding propertyValue=UTF-8
+ 
+dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
+### ADD eclipselink.ddl-generation, eclipselink.application-location, eclipselink.logging.level and eclipselink.ddl-generation.output-mode properties ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.ddl-generation propertyValue=drop-and-create-tables
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.application-location propertyValue=sql/
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.logging.level propertyValue=SEVERE
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.ddl-generation.output-mode propertyValue=both
+
+### ADD the eclipselink provider element ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider elementValue=org.eclipse.persistence.jpa.PersistenceProvider
+

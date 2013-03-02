@@ -1,0 +1,6 @@
+#!/bin/sh
+### DELETE *derby* dependencies ###
+f=$d/$artifactId/pom.xml
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.apache.derby artifactId=derby version=10.9.1.0
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.apache.derby artifactId=derbytools version=10.9.1.0
+
