@@ -14,7 +14,6 @@ saxonb-xslt -s:$f -xsl:$xslDir/pom/deletePlugin.xsl -o:$f groupId=org.apache.mav
 ### DELETE the pom properties ###
 saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=this.persistenceUnitName propertyValue=persistenceUnit
 saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=project.build.sourceEncoding propertyValue=UTF-8
-saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=this.mainClass
 
 ### DELETE the datanucleus dependencies ###
 saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=javax.jdo artifactId=jdo-api version=3.0

@@ -9,7 +9,6 @@ saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=log4j artifac
 ### ADD the pom properties ###
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=this.persistenceUnitName propertyValue=persistenceUnit
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=project.build.sourceEncoding propertyValue=UTF-8
-saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=this.mainClass propertyValue=org.tssg.fame.combinedJPAexample.main.TestBookProductInventory
 
 ### ADD the pluginRepositories element as a child of <project> element ###
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addChildToProject.xsl -o:$f elementName=pluginRepositories
