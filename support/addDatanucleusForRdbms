@@ -1,0 +1,5 @@
+#!/bin/sh
+. addDatanucleus
+
+### ADD datanucleus-rdbms dependency ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-rdbms version='[3.2.0-m2, 3.2.99)'

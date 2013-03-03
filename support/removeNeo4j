@@ -1,5 +1,9 @@
 #!/bin/sh
-### DELETE neo4j and ADD rdbms ###
+### DELETE neo4j ###
+f=$d/$artifactId/pom.xml
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.neo4j artifactId=neo4j version=1.8.1
 saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-neo4j version='[3.2.0-m2, 3.2.99)'
-saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-rdbms version='[3.2.0-m2, 3.2.99)'
 
+### DELETE neo4j jdbc property in persistence.xml ###
+dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url

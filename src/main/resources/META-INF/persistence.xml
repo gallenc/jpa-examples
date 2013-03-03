@@ -15,10 +15,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
    <persistence-unit name="persistenceUnit" transaction-type="RESOURCE_LOCAL">
-      <properties>
-         <property name="javax.persistence.jdbc.url" value="neo4j:testN"/>
-         <property name="datanucleus.autoCreateSchema" value="true"/>
-      </properties>
+      <properties/>
       <class>example.domain.Family</class>
       <class>example.domain.Person</class>
    </persistence-unit>

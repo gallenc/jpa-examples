@@ -18,5 +18,6 @@ saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUn
 saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.ddl-generation.output-mode propertyValue=both
 
 ### ADD the eclipselink provider element ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider
 saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider elementValue=org.eclipse.persistence.jpa.PersistenceProvider
 

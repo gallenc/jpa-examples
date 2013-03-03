@@ -1,4 +1,5 @@
-urlid fe
-url jdbc:hsqldb:testH;shutdown=true
+
+urlid je
+url jdbc:hsqldb:file:testH;shutdown=true
 username sa
 password

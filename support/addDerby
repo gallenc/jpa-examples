@@ -6,8 +6,7 @@ saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.apache.de
 
 dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
 ### UPDATE jdbc properties to *derby* in persistence.xml ###
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.driver propertyValue='org.apache.derby.jdbc.EmbeddedDriver'
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='jdbc:derby:testD;create=true' # jdbc:derby:memory:testD
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.user propertyValue='je'
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.password propertyValue='je'
-
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.driver propertyValue='org.apache.derby.jdbc.EmbeddedDriver'
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='jdbc:derby:testD;create=true' # jdbc:derby:memory:testD
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.user propertyValue='je'
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.password propertyValue='je'

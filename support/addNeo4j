@@ -3,12 +3,7 @@
 f=$d/$artifactId/pom.xml
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-neo4j version='[3.2.0-m2, 3.2.99)'
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.neo4j artifactId=neo4j version=1.8.1
-saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-rdbms version='[3.2.0-m2, 3.2.99)'
 
 dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
-### UPDATE jdbc properties to *neo4j* in persistence.xml ###
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.driver propertyValue=''
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='neo4j:testN'
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.user propertyValue=''
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.password propertyValue=''
-
+### ADD jdbc properties to *neo4j* in persistence.xml ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='neo4j:testN'

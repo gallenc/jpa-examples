@@ -5,14 +5,13 @@ saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.hsqldb ar
 
 dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
 ### UPDATE jdbc properties to *hsqldb* in persistence.xml ###
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.driver propertyValue='org.hsqldb.jdbcDriver'
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='jdbc:hsqldb:testH;create=true' # jdbc:hsqldb:mem:testH
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.user propertyValue='SA'
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/updateProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.password propertyValue=''
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.driver propertyValue='org.hsqldb.jdbcDriver'
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='jdbc:hsqldb:testH;create=true' # jdbc:hsqldb:mem:testH
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.user propertyValue='SA'
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.password propertyValue=''
 
 echo '
 urlid je
 url jdbc:hsqldb:file:testH;shutdown=true
 username sa
 password' > $d/$artifactId/sqltool.rc
-
