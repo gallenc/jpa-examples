@@ -1,7 +1,6 @@
 #!/bin/sh
 ### ADD neo4j and DELETE rdbms ###
 f=$d/$artifactId/pom.xml
-saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-neo4j version='[3.2.0-m2, 3.2.99)'
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.neo4j artifactId=neo4j version=1.8.1
 
 saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=this.mainClass propertyValue=example.main.TestBookProductInventory
