@@ -52,7 +52,7 @@ To use the project you will need both Java 5+ and maven 2+. If using neo4j serve
 
 	cd ~/work/jpa-examples
 
-\# Choose which combination of conditions you need. For example, using eclipselink and derby:
+\# Choose which combination of conditions you need. The master branch is the base - it does not have any of the specific conditions that are needed to run the examples. Therefore one of the branches should be chosen. For example, using eclipselink and derby:
 
 	git branch eclipselink-derby
 
