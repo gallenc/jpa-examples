@@ -16,7 +16,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.tssg.fame</groupId>
    <artifactId>jpa-examples</artifactId>
-   <version>0.3</version>
+   <version>0.4</version>
    <dependencies>
       <dependency>
          <groupId>junit</groupId>

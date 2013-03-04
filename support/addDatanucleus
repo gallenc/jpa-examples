@@ -77,8 +77,6 @@ sed -i '/tempXXX/d' $f
 dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
 # Update the JPA persistence provider
 saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider
-saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider elementValue=org.datanucleus.jpa.PersistenceProviderImpl
 
 # Add property to create the schema automatically
 saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=datanucleus.autoCreateSchema propertyValue=true
-

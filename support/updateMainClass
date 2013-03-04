@@ -1,0 +1,5 @@
+#!/bin/sh
+propertyValue=$1
+f=$d/$artifactId/pom.xml
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=this.mainClass
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=this.mainClass propertyValue=$propertyValue
