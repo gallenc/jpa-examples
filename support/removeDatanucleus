@@ -1,0 +1,30 @@
+#!/bin/sh
+f=$d/$artifactId/pom.xml
+### DELETE the datanucleus repository ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteRepository.xsl -o:$f id=DN_M2_Repo name='DataNucleus Repository' url=http://www.datanucleus.org/downloads/maven2
+
+### DELETE the datanucleus plugin repository ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deletePluginRepository.xsl -o:$f id=DataNucleus_2 url=http://www.datanucleus.org/downloads/maven2/
+
+### DELETE the extra datanucleus plugins ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deletePlugin.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-maven-plugin version=3.2.0-m3
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deletePlugin.xsl -o:$f groupId=org.codehaus.mojo artifactId=exec-maven-plugin version=1.1 
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deletePlugin.xsl -o:$f groupId=org.apache.maven.plugins artifactId=maven-assembly-plugin version=2.4
+
+### DELETE the pom properties ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=this.persistenceUnitName propertyValue=persistenceUnit
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=project.build.sourceEncoding propertyValue=UTF-8
+
+### DELETE the datanucleus dependencies ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=javax.jdo artifactId=jdo-api version=3.0
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.apache.geronimo.specs artifactId=geronimo-jpa_2.0_spec version=1.1
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-core version='[3.2.0-m2, 3.2.99)'
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-api-jpa version='[3.2.0-m2, 3.2.99)'
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-rdbms version='[3.2.0-m2, 3.2.99)'
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.datanucleus artifactId=datanucleus-neo4j version='[3.2.0-m2, 3.2.99)'
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=log4j artifactId=log4j version='[1.2, 1.3)'
+
+dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
+### DELETE the datanucleus.autoCreateSchema property ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=datanucleus.autoCreateSchema propertyValue=true
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider

@@ -1,0 +1,12 @@
+#!/bin/sh
+### DELETE *derby* dependencies ###
+f=$d/$artifactId/pom.xml
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.apache.derby artifactId=derby version=10.9.1.0
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.apache.derby artifactId=derbytools version=10.9.1.0
+
+dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
+### DELETE jdbc properties ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.driver
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.user
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.password

@@ -1,0 +1,10 @@
+#!/bin/sh
+### ADD neo4j and DELETE rdbms ###
+f=$d/$artifactId/pom.xml
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addDependency.xsl -o:$f groupId=org.neo4j artifactId=neo4j version=1.8.1
+
+saxonb-xslt -s:$f -xsl:$xslDir/pom/addProperty.xsl -o:$f propertyName=this.mainClass propertyValue=example.main.TestBookProductInventory
+
+dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
+### ADD jdbc properties to *neo4j* in persistence.xml ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/addProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=javax.persistence.jdbc.url propertyValue='neo4j:testN'

@@ -1,0 +1,21 @@
+#!/bin/sh
+f=$d/$artifactId/pom.xml
+### DELETE the *eclipselink* repository ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteRepository.xsl -o:$f id='Eclipselink repo' url=http://download.eclipse.org/rt/eclipselink/maven.repo name='Eclipselink repo'
+
+### DELETE *eclipselink* dependency ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteDependency.xsl -o:$f groupId=org.eclipse.persistence artifactId=eclipselink version=2.4.0
+
+### DELETE pom properties ###
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=this.persistenceUnitName propertyValue=persistenceUnit
+saxonb-xslt -s:$f -xsl:$xslDir/pom/deleteProperty.xsl -o:$f propertyName=project.build.sourceEncoding propertyValue=UTF-8
+
+dp=$d/$artifactId/src/main/resources/META-INF/persistence.xml
+### DELETE eclipselink.ddl-generation, eclipselink.application-location, eclipselink.logging.level and eclipselink.ddl-generation.output-mode properties ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.ddl-generation propertyValue=drop-and-create-tables
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.application-location propertyValue=sql/
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.logging.level propertyValue=SEVERE
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteProperty.xsl -o:$dp persistenceUnitName=$persistenceUnitName propertyName=eclipselink.ddl-generation.output-mode propertyValue=both
+
+### DELETE the eclipselink provider element ###
+saxonb-xslt -s:$dp -xsl:$xslDir/persistence/deleteElement.xsl -o:$dp persistenceUnitName=$persistenceUnitName elementName=provider elementValue=org.eclipse.persistence.jpa.PersistenceProvider
