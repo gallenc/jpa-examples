@@ -32,13 +32,13 @@ public class TestFamilyPersonJob {
 
 	private static final org.slf4j.Logger LOG = LoggerFactory
 			.getLogger(TestFamilyPersonJob.class);
-	private static final String userHome = System.getProperty("user.home");
-	private static final String baseDir = "work";
-	private static final String project = "jpa-examples";
-	private static final String projectroot = userHome + "/" + baseDir + "/"
-			+ project;
-	private static final String log4jProperties = projectroot
-			+ "/log4j.properties";
+	//private static final String userHome = System.getProperty("user.home");
+	
+//	private static final String userHome = "./";
+//	private static final String baseDir = "work";
+//	private static final String project = "jpa-examples";
+//	private static final String projectroot = userHome + "/" + baseDir + "/"+ project;
+	private static final String log4jProperties = "./log4j.properties";
 
 	private static final String PERSISTENCE_UNIT_NAME = "persistenceUnit";
 	private EntityManagerFactory factory;

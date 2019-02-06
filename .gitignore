@@ -7,3 +7,5 @@ testH/
 testH.*
 testN/
 *.log
+/.classpath
+/.project
